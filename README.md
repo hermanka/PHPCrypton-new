@@ -9,30 +9,25 @@ Terdapat dua fungsi yang dapat digunakan oleh pengguna PHPCrypton yaitu <em>sing
 | Single Obfuscation | Melakukan obfuskasi layout dan enkripsi pada satu berkas PHP yang telah ditentukan |
 | Directory Obfuscation | Melakukan obfuskasi layout dan enkripsi pada suatu direktori yang telah ditentutkan  |
 
-## How to Compile
+## How to Install PHPCrypton?
 
-### Install PHP-CPP first
+### 1. Download Requirement
+        sudo apt-get install git gcc make re2c php php-json php-dev libpcre3-dev libboost-all-dev 
 
-        sudo apt-get install git gcc make re2c php7.0 php7.0-json php7.0-dev libpcre3-dev 
+### 2. Install PHP-CPP first
+
         git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git
         cd PHP-CPP/
         make
         sudo make install
 
-### Compile the source
+### 3. Install PHPCrypton
 
-        make
-        sudo make install
-
-## How to Recompile
-
-        make clean
-        make
+        git clone https://github.com/ismakhrnsa/PHPCrypton.git
+        cd PHPCrypton/
         sudo make install
 
 ## Important!
-
-Don't forget to change firstkey and secondkey in main.cpp file.
 
 Change INI_DIR in Makefile according to your machine
 
@@ -41,33 +36,22 @@ make sure you have enable php mod using
         phpenmod phpcrypton
 
 
-## Encrypt php file
+## Single Obfuscation
 
 ```php
 <?php
 
-        PHPCrypton::encodeFile("bf-cbc", "loop.php");
+       PHPCrypton::singleobfuscation("/home/ubuntu/PHPCrypton/examples/DirA/action.php");
 
 ?>
 ```
 
-## Encrypt code
+## Directory Obfuscation
 
 ```php
 <?php
 
-        $code = '$x = 1;        
-                while($x <= 5) {
-                echo "The number is: $x <br>";
-                $x++;
-                }';
-        PHPCrypton::encode("bf-cbc", $code);
+       PHPCrypton::directoryobfuscation("/home/ubuntu/PHPCrypton/examples/DirA/");
 
 ?>
 ```
-
-## Encryption algorithm choices
-
-Use any open ssl cipher method [https://www.php.net/manual/en/function.openssl-get-cipher-methods.php](https://www.php.net/manual/en/function.openssl-get-cipher-methods.php)
-
-
