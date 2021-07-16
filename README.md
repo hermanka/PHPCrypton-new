@@ -1,7 +1,13 @@
 # PHPCrypton
 
-Encrypt your PHP source code using PHPCrypton. Like IonCube Loader but it's free...
+<p style="text-align: justify;">PHPCrypton dikembangkan untuk dapat melakukan obfuskasi layout dan enkripsi menggunakan algoritme AES-256 pada kode sumber PHP. <br />
+Terdapat dua fungsi yang dapat digunakan oleh pengguna PHPCrypton yaitu <em>single obfuscation</em> dan <em>directory obfuscation.</em></p>
+<p style="text-align: justify;">&nbsp;</p>
 
+| Fungsi PHPCrypton | Kegunaan |
+| ------ | ------ |
+| Single Obfuscation | Melakukan obfuskasi layout dan enkripsi pada satu berkas PHP yang telah ditentukan |
+| Directory Obfuscation | Melakukan obfuskasi layout dan enkripsi pada suatu direktori yang telah ditentutkan  |
 
 ## How to Compile
 
