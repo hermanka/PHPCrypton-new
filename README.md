@@ -11,17 +11,27 @@ Terdapat dua fungsi yang dapat digunakan oleh pengguna PHPCrypton yaitu <em>sing
 
 ## How to Install PHPCrypton?
 
-### 1. Download Requirement
-        sudo apt-get install git gcc make re2c php php-json php-dev libpcre3-dev libboost-all-dev 
+### 1. Download Requirement for PHP Programming and PHP-CPP
 
-### 2. Install PHP-CPP first
+        sudo apt-get install git gcc make re2c php php-json php-dev libpcre3-dev libboost-all-dev 
+### 2. Install Apache2
+
+        sudo apt-get install apache2 
+### 3. Install MySQL 
+
+        sudo apt-get install mysql-server php-mysql 
+        sudo mysql_secure_installation 
+### 4. Install phpMyAdmin
+
+        sudo apt-get install phpmyadmin
+### 5. Install PHP-CPP
 
         git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git
         cd PHP-CPP/
         make
         sudo make install
 
-### 3. Install PHPCrypton
+### 6. Install PHPCrypton
 
         git clone https://github.com/ismakhrnsa/PHPCrypton.git
         cd PHPCrypton/
