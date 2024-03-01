@@ -574,7 +574,7 @@ static void encrypt_file(Php::Parameters &params)
         Php::Value openssl_raw_data = Php::constant("OPENSSL_RAW_DATA");
 
         std::string first_encrypted = Php::call("openssl_encrypt", data, method, first_key, openssl_raw_data, iv);
-        std::string second_encrypted = Php::call("hash_hmac", "sha3-512", first_encrypted, second_key, true);
+        std::string second_encrypted = Php::call("hash_hmac", "sha512", first_encrypted, second_key, true);
 
         std::string output = Php::call("base64_encode", iv + second_encrypted + first_encrypted);
         return output;
@@ -603,7 +603,7 @@ static void encrypt_file(Php::Parameters &params)
 
         std::string data = Php::call("openssl_decrypt", first_encrypted, method, first_key, openssl_raw_data, iv);
 
-        std::string second_encrypted_new = Php::call("hash_hmac", "sha3-512", first_encrypted, second_key, true);
+        std::string second_encrypted_new = Php::call("hash_hmac", "sha512", first_encrypted, second_key, true);
 
         if (Php::call("hash_equals", second_encrypted, second_encrypted_new))
         {
