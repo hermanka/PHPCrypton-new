@@ -1,5 +1,5 @@
 <?php
 
-PHPCrypton::singleobfuscation("tes#2.php");
+PHPCrypton::singleobfuscation("tes.php");
 
 ?>
