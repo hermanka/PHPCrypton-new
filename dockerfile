@@ -9,7 +9,13 @@ RUN apt-get update && apt-get install -y \
     make \
     re2c \
     apache2 \
-    mysql-server \
+    mysql-server 
+
+# Add PHP PPA
+RUN add-apt-repository ppa:ondrej/php && apt-get update
+
+# Install PHP and extensions
+RUN apt-get install -y \
     php7.0 \
     php7.0-json \
     php7.0-dev \
@@ -18,9 +24,6 @@ RUN apt-get update && apt-get install -y \
     php7.0-mysql \
     phpmyadmin
 
-# Add PHP PPA
-RUN add-apt-repository ppa:ondrej/php && apt-get update
-
 # Clone PHP-CPP repository
 RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git \
     && cd PHP-CPP \
@@ -28,7 +31,8 @@ RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git \
     && make install
 
 # Install PHPCrypton
-RUN cd ./src \
+RUN git clone https://github.com/beloveless/PHPCrypton-new.git \
+    && cd ./src \
     && make install \
     && make clean \
     && make \
@@ -39,6 +43,7 @@ RUN phpenmod phpcrypton
 
 WORKDIR /var/www/html
 
+# Copy PHPCrypton files
 COPY ./src ./
 
 # Expose ports
