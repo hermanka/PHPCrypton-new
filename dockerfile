@@ -28,7 +28,7 @@ RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git \
     && make install
 
 # Install PHPCrypton
-RUN cd ./PHPCrypton \
+RUN cd ./src \
     && make install \
     && make clean \
     && make \
@@ -39,7 +39,7 @@ RUN phpenmod phpcrypton
 
 WORKDIR /var/www/html
 
-COPY ./PHPCrypton ./
+COPY ./src ./
 
 # Expose ports
 EXPOSE 80
