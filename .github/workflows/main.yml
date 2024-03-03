@@ -13,6 +13,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Pull Docker Image
+        run: docker pull loveless2u/phpcrypton-ext:1.0
+
       - name: Create isolated network
         run: docker network create --driver bridge isolated  
 
@@ -20,8 +23,8 @@ jobs:
         run: docker run -d --name phpcrypton-ext loveless2u/phpcrypton-ext:1.0
 
       - name: Run Functional Tests
-        run: docker exec loveless2u/phpcrypton-ext:1.0 php obfus1.php
-        # Menggunakan perintah php obfus1.php untuk menjalankan pengujian fungsional
+        run: docker exec phpcrypton-ext php obfus1.php
+        # Menjalankan pengujian fungsional di dalam container dengan perintah php obfus1.php
 
-      - name: stop docker
-        run: docker stop docker-apache
+      - name: Stop Docker Container
+        run: docker stop phpcrypton-ext
