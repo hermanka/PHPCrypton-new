@@ -17,7 +17,7 @@ jobs:
         run: docker network create --driver bridge isolated  
 
       - name: Run Container
-        run: docker run -d --name phpcrypton-ext loveless2u/phpcrypton-ext
+        run: docker run -d --name phpcrypton-ext loveless2u/phpcrypton-ext:1.0
 
       - name: Run Functional Tests
         run: docker exec phpcrypton-ext php obfus1.php
