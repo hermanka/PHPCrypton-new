@@ -1,0 +1,27 @@
+name: Functional Testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Functional Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create isolated network
+        run: docker network create --driver bridge isolated  
+
+      - name: Run Container
+        run: docker run -d --name phpcrypton-ext loveless2u/phpcrypton-ext
+
+      - name: Run Functional Tests
+        run: docker exec phpcrypton-ext php obfus1.php
+        # Menggunakan perintah php obfus1.php untuk menjalankan pengujian fungsional
+
+      - name: stop docker
+        run: docker stop docker-apache
