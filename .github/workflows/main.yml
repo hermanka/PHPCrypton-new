@@ -19,6 +19,9 @@ jobs:
       - name: Create isolated network
         run: docker network create --driver bridge isolated  
 
+      - name: Show file and path
+        run: ls && pwd
+
       - name: Run Container
         run: docker run -d --name phpcrypton-ext loveless2u/phpcrypton-ext:1.0
 
