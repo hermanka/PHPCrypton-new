@@ -25,6 +25,9 @@ jobs:
       - name: Run Container
         run: docker run -d --name phpcrypton-ext loveless2u/phpcrypton-ext:1.0
 
+      - name: Make sure phpcrypton-ext is en
+        run: php -m
+
       - name: Run Functional Tests
         run: docker exec phpcrypton-ext php obfus1.php
         # Menjalankan pengujian fungsional di dalam container dengan perintah php obfus1.php
