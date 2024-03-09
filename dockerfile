@@ -42,17 +42,18 @@ COPY ./src /src
 RUN cd /src \
     && make install \
     && make clean \
-    && make
+    && make \
+    && phpenmod phpcrypton
 #    && make install
 
 # Enable PHPCrypton extension
-RUN phpenmod phpcrypton
+# RUN phpenmod phpcrypton
 
 WORKDIR /var/www/html
 
 # Expose ports
 EXPOSE 80
-EXPOSE 3306
+#EXPOSE 3306
 
 # Start Apache and MySQL services
 # CMD service apache2 start && service mysql start && bash
