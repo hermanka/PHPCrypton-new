@@ -55,4 +55,4 @@ EXPOSE 80
 EXPOSE 3306
 
 # Start Apache and MySQL services
-CMD service apache2 start && service mysql start && bash
+# CMD service apache2 start && service mysql start && bash
