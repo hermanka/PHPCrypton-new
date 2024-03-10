@@ -32,11 +32,8 @@ jobs:
           ls
           php tes.php.obfuskasi
 
-      - name: Set working directory
-        run: cd /var/www/html
-
-      - name: Expose port 80
-        run: sudo ufw allow 80
-
       - name: Clean up
         run: sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
+
+      - name: stop docker
+        run: docker stop docker-apache
