@@ -10,12 +10,12 @@ RUN apt-get update && apt-get install -y \
     re2c \
     apache2 \
     mysql-server \
-    php${PHP_VERSION} \
-    php${PHP_VERSION}-json \
-    php${PHP_VERSION}-dev \
+    php7.0 \
+    php7.0-json \
+    php7.0-dev \
     libpcre3-dev \
     libboost-all-dev \
-    php${PHP_VERSION}-mysql \
+    php7.0-mysql \
     phpmyadmin
 
 # Clone PHP-CPP repository
