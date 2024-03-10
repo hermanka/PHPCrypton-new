@@ -45,14 +45,15 @@ jobs:
           sudo make install
 
       - name: Copy PHPCrypton files
-        run: cp -r ./src ./PHP-CPP
+        run: cp -r ./src ./phpcrypt-ex
 
       - name: Install PHPCrypton
         run: |
-          cd /src
+          cd ./phpcrypt-ex
           make install
           make clean
           make
+          make install
           sudo phpenmod phpcrypton
 
       - name: Set working directory
