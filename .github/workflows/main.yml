@@ -45,7 +45,7 @@ jobs:
           sudo make install
 
       - name: Copy PHPCrypton files
-        run: cp -r ./src ./
+        run: cp -r ./src ./PHP-CPP
 
       - name: Install PHPCrypton
         run: |
