@@ -2,7 +2,7 @@
 FROM php:7.4
 
 # Install dependencies
-RUN sudo apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     git \
     gcc \
     make \
