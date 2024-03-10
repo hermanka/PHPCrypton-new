@@ -39,9 +39,6 @@ RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CP
 
 RUN ls && pwd
 
-RUN cd ./
-    && ls
-
 # Copy PHPCrypton files
 RUN cp -r ./src ./phpcrypt-ex
 
