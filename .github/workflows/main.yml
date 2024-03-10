@@ -13,48 +13,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up PHP environment
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 7.0
+      - name: Build Docker Image
+        run: docker build -t phpcrypton .
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            software-properties-common \
-            git \
-            gcc \
-            make \
-            re2c \
-            apache2 \
-            mysql-server \
-            php7.0 \
-            php7.0-json \
-            php7.0-dev \
-            libpcre3-dev \
-            libboost-all-dev \
-            php7.0-mysql \
-            phpmyadmin
-
-      - name: Clone PHP-CPP repository
-        run: |
-          git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CPP
-          cd ./PHP-CPP
-          make
-          sudo make install
-
-      - name: Copy PHPCrypton files
-        run: cp -r ./src ./phpcrypt-ex
-
-      - name: Install PHPCrypton
-        run: |
-          cd ./phpcrypt-ex
-          sudo make install
-          sudo make clean
-          sudo make
-          sudo make install          
-          sudo phpenmod phpcrypton
+      - name: Run Docker Container
+        run: docker run --name phpcrypton-container -d phpcrypton
  
       - name: Check Extension exist
         run: php -m 
