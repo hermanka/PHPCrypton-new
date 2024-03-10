@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up PHP environment
         uses: shivammathur/setup-php@v2
@@ -57,7 +57,10 @@ jobs:
           sudo phpenmod phpcrypton
  
       - name: Check Extension exist
-        run: php -m
+        run: php -m 
+
+      - name: Obfuscation Testing
+        run : php obfus1.php
 
       - name: Set working directory
         run: cd /var/www/html
