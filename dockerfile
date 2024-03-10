@@ -13,14 +13,20 @@ RUN apt-get update && \
         make \
         re2c \
         apache2 \
-        mysql-server \
-        php7.0=7.0.33-0ubuntu0.16.04.15 \
-        php7.0-json \
-        php7.0-dev \
-        libpcre3-dev \
-        libboost-all-dev \
-        php7.0-mysql \
-        phpmyadmin
+
+# Add PHP PPA for additional PHP versions
+RUN add-apt-repository -y ppa:ondrej/php \
+    && apt-get update
+
+# Install specific PHP version
+RUN apt-get install -y php7.0 \
+    mysql-server \
+    php7.0-json \
+    php7.0-dev \
+    libpcre3-dev \
+    libboost-all-dev \
+    php7.0-mysql \
+    phpmyadmin
 
 # Clone PHP-CPP repository
 RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CPP \
