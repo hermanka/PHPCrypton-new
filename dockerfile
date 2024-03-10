@@ -8,17 +8,20 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y \
         software-properties-common \
+        apt-transport-https \ # Tambahkan apt-transport-https
         git \
         gcc \
         make \
         re2c \
-        apache2 \
+        apache2 
 
 # Add PHP PPA for additional PHP versions
-RUN add-apt-repository -y ppa:ondrej/php \
-    && apt-get update
+RUN add-apt-repository -y ppa:ondrej/php 
 
-# Install specific PHP version
+# Update package lists after adding repository
+RUN apt-get update
+
+# Install specific PHP version and other packages
 RUN apt-get install -y php7.0 \
     mysql-server \
     php7.0-json \
