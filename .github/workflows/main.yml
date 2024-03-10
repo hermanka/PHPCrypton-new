@@ -1,4 +1,4 @@
-name: PHPCrypton-Ext
+name: PHP-CPP Functional Testing
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Installation Test
+    name: Functional Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -39,10 +39,10 @@ jobs:
 
       - name: Clone PHP-CPP repository
         run: |
-          git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git /PHP-CPP
-          cd /PHP-CPP
+          git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CPP
+          cd ./PHP-CPP
           make
-          make install
+          sudo make install
 
       - name: Copy PHPCrypton files
         run: cp -r ./src /src
@@ -53,17 +53,16 @@ jobs:
           make install
           make clean
           make
-          make install
-          phpenmod phpcrypton
+          sudo phpenmod phpcrypton
 
       - name: Set working directory
         run: cd /var/www/html
 
       - name: Expose port 80
-        run: ufw allow 80
+        run: sudo ufw allow 80
 
       - name: Clean up
-        run: apt-get clean && sudo rm -rf /var/lib/apt/lists/*
+        run: sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
 
       - name: Start Apache service
-        run: apache2ctl -D FOREGROUND
+        run: sudo apache2ctl -D FOREGROUND
