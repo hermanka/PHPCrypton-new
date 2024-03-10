@@ -50,10 +50,10 @@ jobs:
       - name: Install PHPCrypton
         run: |
           cd ./phpcrypt-ex
-          make install
-          make clean
-          make
           sudo make install
+          sudo make clean
+          sudo make
+          sudo make install          
           sudo phpenmod phpcrypton
 
       - name: Set working directory
