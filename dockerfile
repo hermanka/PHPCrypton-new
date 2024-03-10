@@ -37,12 +37,13 @@ RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CP
     && make \
     && make install
 
-COPY ./src ./
+RUN mkdir -p ./phpcrypt-ex
+COPY ./src ./phpcrypt-ex
 
 RUN ls && pwd
 
 # Copy PHPCrypton files
-RUN cp -r ./src ./phpcrypt-ex
+# RUN cp -r ./src ./phpcrypt-ex
 
 # Install PHPCrypton
 RUN cd ./phpcrypt-ex \
