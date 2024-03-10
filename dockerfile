@@ -50,8 +50,9 @@ RUN cd ./phpcrypt-ex \
     && make install \
     && make clean \
     && make \
-    && make install \
-    && phpenmod -v 7.0 phpcrypton \
+    && make install 
+
+RUN phpenmod -v 7.0 phpcrypton \
     && php -m \
     && php tes.php \
     && php obfus1.php \
