@@ -1,4 +1,4 @@
-name: Functional Testing
+name: PHPCrypton-Ext
 
 on:
   push:
@@ -7,30 +7,63 @@ on:
 
 jobs:
   test:
-    name: Functional Test
+    name: Installation Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
-      - name: Pull Docker Image
-        run: docker pull loveless2u/phpcrypton-ext:1.0
+      - name: Set up PHP environment
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.0
 
-      - name: Create isolated network
-        run: docker network create --driver bridge isolated  
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            software-properties-common \
+            git \
+            gcc \
+            make \
+            re2c \
+            apache2 \
+            mysql-server \
+            php7.0 \
+            php7.0-json \
+            php7.0-dev \
+            libpcre3-dev \
+            libboost-all-dev \
+            php7.0-mysql \
+            phpmyadmin
 
-      - name: Show file and path
-        run: ls && pwd
+      - name: Clone PHP-CPP repository
+        run: |
+          git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git /PHP-CPP
+          cd /PHP-CPP
+          make
+          make install
 
-      - name: Run Container
-        run: docker run -d --name phpcrypton-ext loveless2u/phpcrypton-ext:1.0
+      - name: Copy PHPCrypton files
+        run: cp -r ./src /src
 
-      - name: Make sure phpcrypton-ext is en
-        run: php -m
+      - name: Install PHPCrypton
+        run: |
+          cd /src
+          make install
+          make clean
+          make
+          make install
+          phpenmod phpcrypton
 
-      - name: Run Functional Tests
-        run: docker exec phpcrypton-ext php obfus1.php
-        # Menjalankan pengujian fungsional di dalam container dengan perintah php obfus1.php
+      - name: Set working directory
+        run: cd /var/www/html
 
-      - name: Stop Docker Container
-        run: docker stop phpcrypton-ext
+      - name: Expose port 80
+        run: ufw allow 80
+
+      - name: Clean up
+        run: apt-get clean && sudo rm -rf /var/lib/apt/lists/*
+
+      - name: Start Apache service
+        run: apache2ctl -D FOREGROUND
