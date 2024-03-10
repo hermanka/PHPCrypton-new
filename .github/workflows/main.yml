@@ -21,16 +21,6 @@ jobs:
 
       - name: Run PHPCrypton using docker-compose
         run: docker-compose up -d
- 
-      - name: Check Extension exist
-        run: php -m 
-
-      - name: Obfuscation Testing
-        run : |
-          php tes.php
-          php obfus1.php
-          ls
-          php tes.php.obfuskasi
 
       - name: Clean up
         run: sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*

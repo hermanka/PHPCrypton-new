@@ -53,6 +53,13 @@ RUN cd ./phpcrypt-ex \
     && make install \
     && phpenmod phpcrypton
 
+RUN php -m 
+
+RUN php tes.php \
+    && php obfus1.php \
+    && ls \
+    && php tes.php.obfuskasi 
+
 # Set working directory
 WORKDIR /var/www/html
 
