@@ -1,4 +1,4 @@
-name: PHP-CPP Functional Testing
+name: PHPCrypton Functional Testing
 
 on:
   push:
@@ -60,7 +60,10 @@ jobs:
         run: php -m 
 
       - name: Obfuscation Testing
-        run : php obfus1.php
+        run : |
+          php obfus1.php
+          ls
+          sudo nano tes.php
 
       - name: Set working directory
         run: cd /var/www/html
