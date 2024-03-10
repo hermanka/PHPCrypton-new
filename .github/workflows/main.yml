@@ -55,6 +55,9 @@ jobs:
           sudo make
           sudo make install          
           sudo phpenmod phpcrypton
+ 
+      - name: Check Extension exist
+        run: php -m
 
       - name: Set working directory
         run: cd /var/www/html
@@ -64,6 +67,3 @@ jobs:
 
       - name: Clean up
         run: sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
-
-      - name: Start Apache service
-        run: sudo apache2ctl -D FOREGROUND
