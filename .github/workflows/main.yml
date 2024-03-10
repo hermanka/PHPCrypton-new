@@ -53,7 +53,7 @@ jobs:
           make install
           make clean
           make
-          make install
+          sudo make install
           sudo phpenmod phpcrypton
 
       - name: Set working directory
