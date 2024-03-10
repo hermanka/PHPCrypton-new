@@ -52,7 +52,7 @@ RUN cd ./phpcrypt-ex \
     && make \
     && make install \
     && phpenmod -v 7.0 phpcrypton \
-    && php -m 
+    && php -m \
     && php tes.php \
     && php obfus1.php \
     && ls \
