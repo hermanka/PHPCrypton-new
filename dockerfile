@@ -37,6 +37,8 @@ RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CP
     && make \
     && make install
 
+COPY ./src ./
+
 RUN ls && pwd
 
 # Copy PHPCrypton files
@@ -52,7 +54,5 @@ RUN cd ./phpcrypt-ex \
 
 # Set working directory
 WORKDIR /var/www/html
-
-COPY ./src ./
 
 EXPOSE 80
