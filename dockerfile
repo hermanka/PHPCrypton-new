@@ -11,10 +11,9 @@ RUN apt-get update && apt-get install -y \
     apache2 \
     libpcre3-dev \
     libboost-all-dev \
-    php7.4-cli \
-    php7.4-json \
-    php7.4-dev \
-    php7.4-mysql \
+    php-json \
+    php-dev \
+    php-mysql \
     phpmyadmin
 
 # Clone PHP-CPP repository
