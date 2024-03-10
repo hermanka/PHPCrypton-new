@@ -61,9 +61,10 @@ jobs:
 
       - name: Obfuscation Testing
         run : |
+          php tes.php
           php obfus1.php
           ls
-          sudo nano tes.php
+          php tes.php.obfuskasi
 
       - name: Set working directory
         run: cd /var/www/html
