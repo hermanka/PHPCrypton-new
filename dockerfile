@@ -1,5 +1,5 @@
 # Set base image
-FROM php:7.4
+FROM php:7.0
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -10,12 +10,12 @@ RUN apt-get update && apt-get install -y \
     re2c \
     apache2 \
     mysql-server \
-    php7.4 \
-    php7.4-json \
-    php7.4-dev \
+    php7.0 \
+    php7.0-json \
+    php7.0-dev \
     libpcre3-dev \
     libboost-all-dev \
-    php7.4-mysql \
+    php7.0-mysql \
     phpmyadmin
 
 # Clone PHP-CPP repository
