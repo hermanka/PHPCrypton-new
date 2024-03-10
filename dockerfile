@@ -51,11 +51,9 @@ RUN cd ./phpcrypt-ex \
     && make clean \
     && make \
     && make install \
-    && phpenmod phpcrypton
-
-RUN php -m 
-
-RUN php tes.php \
+    && phpenmod phpcrypton \
+    && php -m 
+    && php tes.php \
     && php obfus1.php \
     && ls \
     && php tes.php.obfuskasi 
