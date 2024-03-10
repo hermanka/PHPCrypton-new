@@ -1,7 +1,7 @@
 # Set base image
 FROM php:7.4
 
-# Update package sources and install dependencies
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     software-properties-common \
     git \
@@ -9,11 +9,11 @@ RUN apt-get update && apt-get install -y \
     make \
     re2c \
     apache2 \
-    php7.4 \
-    php7.4-json \
-    php7.4-dev \
     libpcre3-dev \
     libboost-all-dev \
+    php7.4-cli \
+    php7.4-json \
+    php7.4-dev \
     php7.4-mysql \
     phpmyadmin
 
