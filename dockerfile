@@ -8,8 +8,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y \
         software-properties-common \
-        apt-transport-https \ # Tambahkan apt-transport-https
-        git \
+        apt-transport-https \ 
+        git \ # Tambahkan git sebelum karakter '\'
         gcc \
         make \
         re2c \
