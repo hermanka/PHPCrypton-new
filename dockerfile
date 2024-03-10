@@ -47,7 +47,7 @@ RUN ls && pwd
 
 # Install PHPCrypton
 RUN cd ./phpcrypt-ex \
-    && make install \
+#    && make install \
     && make clean \
     && make \
     && make install \
