@@ -1,5 +1,5 @@
 # Base image
-FROM ubuntu:22.04
+FROM ubuntu:18.04
 
 # Set non-interactive mode
 ENV DEBIAN_FRONTEND=noninteractive
@@ -22,13 +22,13 @@ RUN add-apt-repository -y ppa:ondrej/php
 RUN apt-get update
 
 # Install specific PHP version and other packages
-RUN apt-get install -y php7.0 \
+RUN apt-get install -y php7.4 \
     mysql-server \
-    php7.0-json \
-    php7.0-dev \
+    php7.4-json \
+    php7.4-dev \
     libpcre3-dev \
     libboost-all-dev \
-    php7.0-mysql \
+    php7.4-mysql \
     phpmyadmin
 
 # Clone PHP-CPP repository
@@ -52,7 +52,7 @@ RUN cd ./phpcrypt-ex \
     && make \
     && make install 
 
-RUN phpenmod -v 7.0 phpcrypton \
+RUN phpenmod -v 7.4 phpcrypton \
     && php -m \
     && php tes.php \
     && php obfus1.php \
