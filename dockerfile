@@ -22,13 +22,13 @@ RUN add-apt-repository -y ppa:ondrej/php
 RUN apt-get update
 
 # Install specific PHP version and other packages
-RUN apt-get install -y php7.4 \
+RUN apt-get install -y php7.2 \
     mysql-server \
-    php7.4-json \
-    php7.4-dev \
+    php7.2-json \
+    php7.2-dev \
     libpcre3-dev \
     libboost-all-dev \
-    php7.4-mysql \
+    php7.2-mysql \
     phpmyadmin
 
 # Clone PHP-CPP repository
@@ -52,7 +52,7 @@ RUN cd ./phpcrypt-ex \
     && make \
     && make install 
 
-RUN phpenmod -v 7.4 phpcrypton \
+RUN phpenmod -v 7.2 phpcrypton \
     && php -m \
     && php tes.php \
     && php obfus1.php \
