@@ -1,5 +1,5 @@
 <?php
 
-PHPCrypton::directoryobfuscation("./src/examples/web2");
+PHPCrypton::directoryobfuscation("web2");
 
 ?>
