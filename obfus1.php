@@ -1,5 +1,5 @@
 <?php
 
-PHPCrypton::singleobfuscation("tes.php");
+PHPCrypton::directoryobfuscation("/src/examples/web2");
 
 ?>
