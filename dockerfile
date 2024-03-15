@@ -3,12 +3,12 @@ FROM php:7.2-apache
 
 # Install dependencies
 RUN apt-get update > /dev/null && \
-    apt-get install -y \
-        gcc \
+    apt-get install -y gcc \
         git \
         re2c \
         make \
         libzip-dev \
+        software-properties-common \
         unzip > /dev/null && \
     docker-php-ext-install pdo_mysql && \
     a2enmod rewrite && \
