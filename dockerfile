@@ -57,6 +57,7 @@ RUN cd ./phpcrypt-ex \
 WORKDIR /var/www/html
 RUN rm -rf *
 COPY ./web2 . 
+RUN cat /etc/apache2/sites-available/000-default.conf
 
 # sama dengan php obfus1.php \
 # RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');" > /dev/null
