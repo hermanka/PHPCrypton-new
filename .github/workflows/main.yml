@@ -16,20 +16,20 @@ jobs:
       - name: Create isolated network
         run: docker network create --driver bridge isolated      
 
-      - name: Build PHPCrypton
+      - name: Build PHPCrypton Image
         run: docker build -t phpcrypton:latest .
 
-      - name: Run PHPCrypton using docker-compose
+      - name: Run PHPCrypton Container
         run: docker-compose up -d
 
-      - name: Check container
-        run: docker ps
+      # - name: Check container
+      #   run: docker ps
 
       - name: Copy source code to container
         run: docker cp web2/. docker-apache:/var/www/html
 
       - name: Obfuscate
-        run: docker exec docker-apache obfuscate
+        run: docker exec docker-apache /bin/bash obfuscate
 
       - name: Check inside container
         run: docker exec docker-apache ls -la /var/www/html/
