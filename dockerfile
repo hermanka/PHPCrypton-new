@@ -4,11 +4,6 @@ FROM ubuntu:18.04
 # Set non-interactive mode
 ENV DEBIAN_FRONTEND=noninteractive
 
-
-
-# Add PHP PPA for additional PHP versions
-RUN add-apt-repository -y ppa:ondrej/php
-
 # Install dependencies
 RUN apt-get -qq update && \
     apt-get install -qq -y \
@@ -19,6 +14,12 @@ RUN apt-get -qq update && \
         make \
         re2c \
         apache2
+
+# Add PHP PPA for additional PHP versions
+RUN add-apt-repository -y ppa:ondrej/php
+
+# Update deps
+RUN apt-get -qq update 
 
 # Install specific PHP version and other packages
 RUN apt-get install -qq -y php7.2 \
