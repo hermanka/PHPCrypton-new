@@ -26,7 +26,7 @@ jobs:
         run: docker ps
 
       - name: Check inside container
-        run: docker exec docker-apache ls /var/www/html
+        run: docker exec docker-apache cat /etc/apache2/sites-available/000-default.conf
 
       - name: Get Container URL
         run: |

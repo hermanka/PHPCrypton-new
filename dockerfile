@@ -48,9 +48,9 @@ RUN cd ./phpcrypt-ex \
     && make clean -s \
     && make -s \
     && make install -s \
-    && phpenmod -v 7.2 phpcrypton \
-    && service apache2 restart \
-    && service apache2 status
+    && phpenmod -v 7.2 phpcrypton 
+    # && service apache2 restart \
+    # && service apache2 status
     # && php -m \
 
 # Set working directory
