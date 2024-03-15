@@ -29,6 +29,7 @@ RUN apt-get install -y php7.2 \
     php7.2-dev \
     libpcre3-dev \
     php7.2-mysql \
+    curl \
     libboost-all-dev > /dev/null && \
     a2enmod rewrite > /dev/null
     
