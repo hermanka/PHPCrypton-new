@@ -8,8 +8,8 @@ function pdo_connect(){
     try {
     	return new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME, $DATABASE_USER, $DATABASE_PASS);
     } catch (PDOException $exception) {
-        var_dump($exception);
-    	die ('Failed to connect to database!');
+        echo $exception;
+    	// die ('Failed to connect to database!');
     }
 }
 
