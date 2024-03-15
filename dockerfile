@@ -9,8 +9,7 @@ RUN apt-get update > /dev/null && \
         re2c \
         make \
         libzip-dev \
-        unzip > /dev/null \
-        && \
+        unzip > /dev/null && \
     docker-php-ext-install pdo_mysql && \
     a2enmod rewrite && \
     service apache2 restart
