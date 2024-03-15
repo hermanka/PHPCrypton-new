@@ -9,6 +9,7 @@ RUN apt-get update > /dev/null && \
         make \
         libzip-dev \
         software-properties-common \
+        apt-transport-https \
         unzip > /dev/null && \
     docker-php-ext-install pdo_mysql && \
     a2enmod rewrite && \
