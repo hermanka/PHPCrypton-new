@@ -50,7 +50,7 @@ RUN apt-get update && apt-get install -y vim \
 # Set working directory
 WORKDIR /var/www/html
 RUN rm -rf *
-COPY ./web2 . 
+# COPY ./web2 . 
 RUN ls -la
 # ENV APACHE_RUN_USER www-data
 # ENV APACHE_RUN_GROUP www-data
