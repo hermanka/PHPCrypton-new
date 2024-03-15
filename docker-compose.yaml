@@ -10,8 +10,8 @@ services:
       - "80:80"
     links:
       - mysql
-    volumes:
-      - ./config/:/etc/apache2/sites-available/
+    # volumes:
+    #   - ./config/:/etc/apache2/sites-available/
 
   mysql:
     image: mysql:latest
