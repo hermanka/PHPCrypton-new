@@ -25,6 +25,9 @@ jobs:
       - name: Check container
         run: docker ps
 
+      - name: Copy source code to container
+        run: docker cp ./web2 docker-apache:/var/www/html
+
       - name: Check inside container
         run: docker exec docker-apache ls /var/www/html/
 
