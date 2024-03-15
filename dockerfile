@@ -5,8 +5,8 @@ FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
-RUN apt-get -qq update && \
-    apt-get install -qq -y \
+RUN apt-get update  > /dev/null && \
+    apt-get install -y \
         software-properties-common \
         apt-transport-https \
         git \
@@ -22,15 +22,15 @@ RUN add-apt-repository -y ppa:ondrej/php
 RUN apt-get update > /dev/null
 
 # Install specific PHP version and other packages
-RUN apt-get install -qq -y php7.2 \
+RUN apt-get install -y php7.2 \
     # mysql-server \
     php7.2-json \
     php7.2-dev \
     libpcre3-dev \
-    libboost-all-dev && \
-    docker-php-ext-install pdo_mysql && \
+    php7.2-mysql \
+    libboost-all-dev > /dev/null && \
     a2enmod rewrite > /dev/null
-    # php7.2-mysql
+    
     # phpmyadmin
 
 # Clone PHP-CPP repository
