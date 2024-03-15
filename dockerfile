@@ -62,4 +62,6 @@ RUN cd ./phpcrypt-ex \
 # Set working directory
 WORKDIR /var/www/html
 
+COPY ./web2 . #titik maksudnya ke workdir
+
 EXPOSE 80
