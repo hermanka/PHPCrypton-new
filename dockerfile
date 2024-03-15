@@ -52,13 +52,13 @@ RUN cd ./phpcrypt-ex \
 # Set working directory
 WORKDIR /var/www/html
 RUN rm -rf *
-# COPY ./web2 .
+COPY ./web2 .
 
 
 # sama dengan php obfus1.php \
-# RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');"
+RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');"
 
 EXPOSE 80
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
-CMD ["php", "-r", "PHPCrypton::directoryobfuscation('/var/www/html/');"]
+# CMD ["php", "-r", "PHPCrypton::directoryobfuscation('/var/www/html/');"]
