@@ -1,6 +1,7 @@
 # Base image
 FROM php:7.2-apache
 
+RUN cat /etc/os-release
 # Install dependencies
 RUN apt-get update > /dev/null && \
     apt-get install -y gcc \
@@ -11,7 +12,7 @@ RUN apt-get update > /dev/null && \
         software-properties-common \
         apt-transport-https \
         unzip > /dev/null && \
-    docker-php-ext-install pdo_mysql && \
+    docker-php-ext-install pdo_mysql > /dev/null && \
     a2enmod rewrite && \
     service apache2 restart
 
