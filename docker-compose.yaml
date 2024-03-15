@@ -10,8 +10,8 @@ services:
       - "80:80"
     links:
       - mysql
-    volumes:
-      - ./web2:/var/www/html
+    # volumes:
+    #   - ./web2:/var/www/html
 
   mysql:
     image: mysql:latest

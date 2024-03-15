@@ -1,62 +1,67 @@
 # Base image
 FROM ubuntu:18.04
 
-ARG DEBIAN_FRONTEND=noninteractive
+# Set non-interactive mode
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
-		apache2 \
-		software-properties-common \
-		supervisor \
-	&& apt-get clean \
-	&& rm -fr /var/lib/apt/lists/*
+# Install dependencies
+RUN apt-get update  > /dev/null && \
+    apt-get install -y \
+        software-properties-common \
+        apt-transport-https \
+        git \
+        gcc \
+        make \
+        re2c \
+        apache2 \
+        apache2-utils > /dev/null
 
-RUN add-apt-repository ppa:ondrej/php
+# Add PHP PPA for additional PHP versions
+RUN add-apt-repository -y ppa:ondrej/php
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-		libapache2-mod-php7.2 \
-		php7.2 \
-		php7.2-bcmath \
-		php7.2-cli \
-		php7.2-curl \
-		php7.2-dev \
-		php7.2-gd \
-		php7.2-imap \
-		php7.2-intl \
-		php7.2-mbstring \
-		php7.2-mysql \
-		php7.2-pspell \
-		# php7.2-xml \
-		# php7.2-xmlrpc \
-		# php-apcu \
-		# php-memcached \
-		# php-pear \
-		# php-redis \
-	&& apt-get clean \
-	&& rm -fr /var/lib/apt/lists/*
+# Update deps
+RUN apt-get update > /dev/null
 
-RUN a2enmod php7.2
-RUN a2enmod rewrite
-# ADD www /var/www/html
-# ADD apache-conf.conf /etc/apache2/sites-available/site.conf
+# Install specific PHP version and other packages
+RUN apt-get install -y php7.2 \
+    # mysql-server \
+    php7.2-json \
+    php7.2-dev \
+    libpcre3-dev \
+    php7.2-mysql \
+    curl \
+    libboost-all-dev > /dev/null && \
+    a2enmod rewrite > /dev/null
+    
+# Clone PHP-CPP repository
+RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CPP \
+    && cd ./PHP-CPP \
+    && make -s \
+    && make install -s
 
-# RUN a2ensite site.conf
-# RUN a2dissite 000-default.conf
+RUN mkdir -p ./phpcrypt-ex
+COPY ./src ./phpcrypt-ex
 
-RUN apt-get update && apt-get install -y vim \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
+# Install PHPCrypton
+RUN cd ./phpcrypt-ex \
+    # && make install \
+    && make clean -s \
+    && make -s \
+    && make install -s \
+    && phpenmod -v 7.2 phpcrypton \
+    && service apache2 restart \
+    && service apache2 status
+    # && php -m \
 
 # Set working directory
 WORKDIR /var/www/html
-RUN rm -rf *
-# COPY ./web2 . 
-RUN ls -la
-# ENV APACHE_RUN_USER www-data
-# ENV APACHE_RUN_GROUP www-data
-# ENV APACHE_LOG_DIR /var/log/apache2
-# ENV APACHE_LOCK_DIR /var/lock/apache2
-# ENV APACHE_PID_FILE /var/run/apache2.pid
+
+COPY ./web2 . 
+
+# sama dengan php obfus1.php \
+# RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');" > /dev/null
+
+RUN ls
 
 EXPOSE 80
 
