@@ -56,8 +56,9 @@ RUN rm -rf *
 
 
 # sama dengan php obfus1.php \
-RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');" > /dev/null
+# RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');"
 
 EXPOSE 80
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+CMD ["php", "-r", "PHPCrypton::directoryobfuscation('/var/www/html/');"]
