@@ -54,15 +54,17 @@ RUN cd ./phpcrypt-ex \
     && phpenmod -v 7.2 phpcrypton \
     && php -m \
 #    && php tes.php \
-    && php obfus1.php \
-    && ls \
+    # && php obfus1.php \
+    # && ls \
 #    && php tes.php.obfuskasi 
-    && cd web2
+    # && cd web2
 
 # Set working directory
 WORKDIR /var/www/html
 
 COPY ./web2 . 
-#titik maksudnya ke workdir
+# sama dengan php obfus1.php \
+RUN php -r "directoryobfuscation './';"
+
 
 EXPOSE 80
