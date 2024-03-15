@@ -57,12 +57,12 @@ RUN cd ./phpcrypt-ex \
 WORKDIR /var/www/html
 RUN rm -rf *
 COPY ./web2 . 
-RUN ls /etc/apache2/sites-available/
+# RUN ls /etc/apache2/sites-available/
 
 # sama dengan php obfus1.php \
 # RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');" > /dev/null
 
-RUN ls
+# RUN ls
 
 EXPOSE 80
 
