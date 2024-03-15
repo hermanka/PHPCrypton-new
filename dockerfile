@@ -43,7 +43,7 @@ RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CP
 RUN mkdir -p ./phpcrypt-ex
 COPY ./src ./phpcrypt-ex
 
-RUN ls && pwd
+# RUN ls && pwd
 
 # Copy PHPCrypton files
 # RUN cp -r ./src ./phpcrypt-ex
@@ -55,7 +55,7 @@ RUN cd ./phpcrypt-ex \
     && make -s \
     && make install -s \
     && phpenmod -v 7.2 phpcrypton \
-    && service apache2 restart
+    && service apache2 restart \
     && service apache2 status
     # && php -m \
 #    && php tes.php \
@@ -69,7 +69,7 @@ WORKDIR /var/www/html
 
 COPY ./web2 . 
 # sama dengan php obfus1.php \
-RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');"
+RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');" > /dev/null
 RUN ls
 
 EXPOSE 80
