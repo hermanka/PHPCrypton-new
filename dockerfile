@@ -27,7 +27,9 @@ RUN apt-get install -qq -y php7.2 \
     php7.2-json \
     php7.2-dev \
     libpcre3-dev \
-    libboost-all-dev > /dev/null
+    libboost-all-dev && \
+    docker-php-ext-install pdo_mysql && \
+    a2enmod rewrite > /dev/null
     # php7.2-mysql
     # phpmyadmin
 
@@ -51,7 +53,8 @@ RUN cd ./phpcrypt-ex \
     && make clean -s \
     && make -s \
     && make install -s \
-    && phpenmod -v 7.2 phpcrypton
+    && phpenmod -v 7.2 phpcrypton \
+    && service apache2 restart
     # && php -m \
 #    && php tes.php \
     # && php obfus1.php \
