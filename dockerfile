@@ -64,7 +64,7 @@ WORKDIR /var/www/html
 
 COPY ./web2 . 
 # sama dengan php obfus1.php \
-RUN php -r 'directoryobfuscation "/var/www/html/"'
+RUN php -r "directoryobfuscation('/var/www/html/')"
 
 
 EXPOSE 80
