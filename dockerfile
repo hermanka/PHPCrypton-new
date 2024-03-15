@@ -13,13 +13,13 @@ RUN apt-get -qq update && \
         gcc \
         make \
         re2c \
-        apache2
+        apache2 > /dev/null
 
 # Add PHP PPA for additional PHP versions
 RUN add-apt-repository -y ppa:ondrej/php
 
 # Update deps
-RUN apt-get -qq update 
+RUN apt-get update > /dev/null
 
 # Install specific PHP version and other packages
 RUN apt-get install -qq -y php7.2 \
@@ -27,7 +27,7 @@ RUN apt-get install -qq -y php7.2 \
     php7.2-json \
     php7.2-dev \
     libpcre3-dev \
-    libboost-all-dev 
+    libboost-all-dev > /dev/null
     # php7.2-mysql
     # phpmyadmin
 
