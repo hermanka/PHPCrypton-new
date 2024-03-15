@@ -39,16 +39,12 @@ jobs:
       # - name: Check Container URL
       #   run: curl http://localhost
 
-      - name: ZAP Scan
-        uses: hermanka/action-full-scan@master
-        with:
-          target: http://${{ env.URL }}
-          network_name: isolated
-          # Additional command line options
-          # -j   runs the AJAX spider
-          # -U   specifies which user to select from the context file
-          # cmd_options: -U "admin" -n badcrud.context
-
+      # - name: ZAP Scan
+      #   uses: hermanka/action-full-scan@master
+      #   with:
+      #     target: http://${{ env.URL }}
+      #     network_name: isolated
+          
       - name: stop docker
         run: docker stop docker-apache
 

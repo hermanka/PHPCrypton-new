@@ -25,12 +25,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		php7.2-mbstring \
 		php7.2-mysql \
 		php7.2-pspell \
-		php7.2-xml \
-		php7.2-xmlrpc \
-		php-apcu \
-		php-memcached \
-		php-pear \
-		php-redis \
+		# php7.2-xml \
+		# php7.2-xmlrpc \
+		# php-apcu \
+		# php-memcached \
+		# php-pear \
+		# php-redis \
 	&& apt-get clean \
 	&& rm -fr /var/lib/apt/lists/*
 
@@ -49,7 +49,7 @@ RUN apt-get update && apt-get install -y vim \
 
 # Set working directory
 WORKDIR /var/www/html
-
+RUN rm -rf *
 COPY ./web2 . 
 
 # ENV APACHE_RUN_USER www-data
