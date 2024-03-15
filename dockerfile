@@ -23,12 +23,12 @@ RUN apt-get update
 
 # Install specific PHP version and other packages
 RUN apt-get install -y php7.2 \
-    mysql-server \
+    # mysql-server \
     php7.2-json \
     php7.2-dev \
     libpcre3-dev \
-    libboost-all-dev \
-    php7.2-mysql
+    libboost-all-dev 
+    # php7.2-mysql
     # phpmyadmin
 
 # Clone PHP-CPP repository
@@ -64,7 +64,7 @@ WORKDIR /var/www/html
 
 COPY ./web2 . 
 # sama dengan php obfus1.php \
-RUN php -r "directoryobfuscation('/var/www/html/')";
+RUN php -r "directoryobfuscation('/var/www/html/');"
 
 
 EXPOSE 80
