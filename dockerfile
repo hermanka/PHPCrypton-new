@@ -56,6 +56,7 @@ RUN cd ./phpcrypt-ex \
     && make install -s \
     && phpenmod -v 7.2 phpcrypton \
     && service apache2 restart
+    && service apache2 status
     # && php -m \
 #    && php tes.php \
     # && php obfus1.php \
@@ -70,6 +71,7 @@ COPY ./web2 .
 # sama dengan php obfus1.php \
 RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');"
 RUN ls
-RUN curl localhost
 
 EXPOSE 80
+
+RUN curl localhost
