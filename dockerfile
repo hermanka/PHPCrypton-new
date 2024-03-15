@@ -28,7 +28,7 @@ RUN apt-get install -y php7.2 \
     php7.2-dev \
     libpcre3-dev \
     libboost-all-dev \
-    php7.2-mysql \
+    php7.2-mysql
     # phpmyadmin
 
 # Clone PHP-CPP repository
