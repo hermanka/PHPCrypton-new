@@ -29,7 +29,7 @@ RUN apt-get install -y php7.2 \
     libpcre3-dev \
     libboost-all-dev \
     php7.2-mysql \
-    phpmyadmin
+    # phpmyadmin
 
 # Clone PHP-CPP repository
 RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CPP \
@@ -64,7 +64,7 @@ WORKDIR /var/www/html
 
 COPY ./web2 . 
 # sama dengan php obfus1.php \
-RUN php -r "directoryobfuscation './';"
+RUN php -r "directoryobfuscation '/var/www/html/';"
 
 
 EXPOSE 80
