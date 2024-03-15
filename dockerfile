@@ -62,5 +62,3 @@ COPY ./web2 .
 RUN ls
 
 EXPOSE 80
-
-RUN curl 127.0.0.1
