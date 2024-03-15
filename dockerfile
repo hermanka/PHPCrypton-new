@@ -37,11 +37,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN a2enmod php7.2
 RUN a2enmod rewrite
-ADD www /var/www/html
-ADD apache-conf.conf /etc/apache2/sites-available/site.conf
+# ADD www /var/www/html
+# ADD apache-conf.conf /etc/apache2/sites-available/site.conf
 
-RUN a2ensite site.conf
-RUN a2dissite 000-default.conf
+# RUN a2ensite site.conf
+# RUN a2dissite 000-default.conf
 
 RUN apt-get update && apt-get install -y vim \
     && apt-get clean \
