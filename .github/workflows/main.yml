@@ -29,7 +29,7 @@ jobs:
         run: docker cp web2/. docker-apache:/var/www/html
 
       - name: Obfuscate
-        run: docker exec docker-apache bash obfuscate
+        run: docker exec docker-apache obfuscate
 
       - name: Check inside container
         run: docker exec docker-apache ls -la /var/www/html/

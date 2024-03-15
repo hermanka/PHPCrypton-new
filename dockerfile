@@ -4,7 +4,7 @@ FROM ubuntu:18.04
 # Set non-interactive mode
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN alias obfuscate="php -r PHPCrypton::directoryobfuscation('/var/www/html/');" >> ~/.bash
+# RUN alias obfuscate="php -r PHPCrypton::directoryobfuscation('/var/www/html/');" >> ~/.bash
 
 # Install dependencies
 RUN apt-get update  > /dev/null && \
@@ -58,7 +58,8 @@ RUN rm -rf *
 
 
 # sama dengan php obfus1.php \
-# RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');"
+RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');" > /usr/bin/obfuscate && \
+    chmod +x /usr/bin/obfuscate
 
 EXPOSE 80
 
