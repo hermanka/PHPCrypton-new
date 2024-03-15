@@ -29,10 +29,10 @@ RUN apt-get update > /dev/null && \
 #         apache2-utils > /dev/null
 
 # Add PHP PPA for additional PHP versions
-RUN add-apt-repository -y ppa:ondrej/php
+# RUN add-apt-repository -y ppa:ondrej/php
 
 # Update deps
-RUN apt-get update > /dev/null
+# RUN apt-get update > /dev/null
 
 # Install specific PHP version and other packages
 RUN apt-get install -y libpcre3-dev \    
