@@ -34,7 +34,7 @@ jobs:
           echo "URL=$URL" >> $GITHUB_ENV
 
       - name: Check Container URL
-        run: curl ${{ env.URL }}/login.php
+        run: curl -L ${{ env.URL }}
 
       # - name: Check Container URL
       #   run: curl http://localhost
