@@ -3,7 +3,9 @@ services:
   docker-apache:
     image: phpcrypton:latest
     container_name: docker-apache
-    command: curl http://localhost
+    command: 
+      - /bin/sh
+      - curl http://localhost
     ports:
       - "80:80"
     links:
