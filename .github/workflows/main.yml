@@ -29,7 +29,7 @@ jobs:
         run: docker cp ./web2/ docker-apache:/var/www/html
 
       - name: Check inside container
-        run: docker exec docker-apache ls /var/www/html/
+        run: docker exec docker-apache ls -la /var/www/html/
 
       # - name: Check inside container
       #   run: ls -la
