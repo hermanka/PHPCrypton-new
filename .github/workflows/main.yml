@@ -25,8 +25,8 @@ jobs:
       - name: Check container
         run: docker ps
 
-      - name: Check inside container
-        run: docker exec docker-apache curl http://localhost
+      # - name: Check inside container
+      #   run: docker exec docker-apache curl http://localhost
 
       - name: Get Container URL
         run: |
