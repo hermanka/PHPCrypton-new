@@ -17,7 +17,7 @@ jobs:
         run: docker network create --driver bridge isolated      
 
       - name: Build PHPCrypton
-        run: docker build -t phpcrypton:latest . --network=isolated
+        run: docker build -t phpcrypton:latest . --network=host
 
       - name: Run PHPCrypton using docker-compose
         run: docker-compose up -d
