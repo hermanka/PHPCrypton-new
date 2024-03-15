@@ -3,15 +3,12 @@ services:
   docker-apache:
     image: phpcrypton:latest
     container_name: docker-apache
-    # command: 
-    #   - /bin/sh
-    #   - curl http://localhost
     ports:
       - "80:80"
     links:
       - mysql
-    # volumes:
-    #   - ./config/:/etc/apache2/sites-available/
+    volumes:
+      - ./web2/:/var/www/html/
 
   mysql:
     image: mysql:latest

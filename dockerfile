@@ -44,25 +44,19 @@ COPY ./src ./phpcrypt-ex
 
 # Install PHPCrypton
 RUN cd ./phpcrypt-ex \
-    # && make install \
     && make clean -s \
     && make -s \
     && make install -s \
     && phpenmod -v 7.2 phpcrypton 
-    # && service apache2 restart \
-    # && service apache2 status
-    # && php -m \
 
 # Set working directory
 WORKDIR /var/www/html
 RUN rm -rf *
-COPY ./web2 . 
-# RUN ls /etc/apache2/sites-available/
+# COPY ./web2 .
+
 
 # sama dengan php obfus1.php \
-# RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');" > /dev/null
-
-# RUN ls
+RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');" > /dev/null
 
 EXPOSE 80
 
