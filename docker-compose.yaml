@@ -5,6 +5,8 @@ services:
     container_name: docker-apache
     ports:
       - "80:80"
+    links:
+      - mysql
 
   mysql:
     image: mysql:latest
