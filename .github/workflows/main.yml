@@ -17,7 +17,7 @@ jobs:
         run: docker network create --driver bridge isolated      
 
       - name: Build PHPCrypton
-        run: docker build -t phpcrypton:latest . --network=host
+        run: docker build -t phpcrypton:latest .
 
       - name: Run PHPCrypton using docker-compose
         run: docker-compose up -d
@@ -25,8 +25,8 @@ jobs:
       - name: Check container
         run: docker ps
 
-      # - name: Check inside container
-      #   run: docker exec docker-apache curl http://localhost
+      - name: Check inside container
+        run: docker exec docker-apache curl http://localhost
 
       - name: Get Container URL
         run: |
