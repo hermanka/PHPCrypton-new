@@ -59,6 +59,7 @@ COPY ./web2 .
 
 # sama dengan php obfus1.php \
 # RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');" > /dev/null
+
 RUN ls
 
 EXPOSE 80

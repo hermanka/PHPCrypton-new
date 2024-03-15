@@ -25,6 +25,9 @@ jobs:
       - name: Check container
         run: docker ps
 
+      - name: Check inside container
+        run: docker exec -it docker-apache "curl localhost"
+
       - name: Get Container URL
         run: |
           URL=http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1)
