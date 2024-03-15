@@ -32,8 +32,6 @@ RUN apt-get install -y php7.2 \
     libboost-all-dev > /dev/null && \
     a2enmod rewrite > /dev/null
     
-    # phpmyadmin
-
 # Clone PHP-CPP repository
 RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CPP \
     && cd ./PHP-CPP \
@@ -42,11 +40,6 @@ RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CP
 
 RUN mkdir -p ./phpcrypt-ex
 COPY ./src ./phpcrypt-ex
-
-# RUN ls && pwd
-
-# Copy PHPCrypton files
-# RUN cp -r ./src ./phpcrypt-ex
 
 # Install PHPCrypton
 RUN cd ./phpcrypt-ex \
@@ -58,20 +51,16 @@ RUN cd ./phpcrypt-ex \
     && service apache2 restart \
     && service apache2 status
     # && php -m \
-#    && php tes.php \
-    # && php obfus1.php \
-    # && ls \
-#    && php tes.php.obfuskasi 
-    # && cd web2
 
 # Set working directory
 WORKDIR /var/www/html
 
 COPY ./web2 . 
+
 # sama dengan php obfus1.php \
 RUN php -r "PHPCrypton::directoryobfuscation('/var/www/html/');" > /dev/null
 RUN ls
 
 EXPOSE 80
 
-RUN curl localhost
+RUN curl 127.0.0.1
