@@ -26,7 +26,7 @@ jobs:
         run: docker ps
 
       - name: Check inside container
-        run: docker exec -it docker-apache "curl localhost"
+        run: docker exec -i docker-apache "curl localhost"
 
       - name: Get Container URL
         run: |
