@@ -33,11 +33,11 @@ jobs:
           URL=http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1)
           echo "URL=$URL" >> $GITHUB_ENV
 
-      # - name: Check Container URL
-      #   run: curl ${{ env.URL }}
-
       - name: Check Container URL
-        run: curl http://localhost
+        run: curl ${{ env.URL }}
+
+      # - name: Check Container URL
+      #   run: curl http://localhost
 
       - name: ZAP Scan
         uses: hermanka/action-full-scan@master
