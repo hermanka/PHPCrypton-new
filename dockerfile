@@ -13,7 +13,8 @@ RUN apt-get update  > /dev/null && \
         gcc \
         make \
         re2c \
-        apache2 > /dev/null
+        apache2 \
+        apache2-utils > /dev/null
 
 # Add PHP PPA for additional PHP versions
 RUN add-apt-repository -y ppa:ondrej/php
