@@ -38,10 +38,11 @@ jobs:
         run: |
           docker exec docker-apache ls -la /var/www/html/
           docker exec docker-apache cat /var/www/html/index.php
+          docker exec docker-apache php /var/www/html/cek_koneksi.php
 
-      - name: Check inside MySQL container
-        run: |
-          docker exec docker-mysql mysql -uroot -ppassword -hlocalhost
+      # - name: Check inside MySQL container
+      #   run: |
+      #     docker exec docker-mysql mysql -uroot -ppassword -hlocalhost
 
       - name: Get AUT URL
         run: |
@@ -50,7 +51,7 @@ jobs:
 
       - name: Check AUT URL
         run: |
-          curl -L http://${{ env.URL }}
+          curl -L http://${{ env.URL }}/cek_koneksi.php
       
       - name: Context Setup
         # env:
