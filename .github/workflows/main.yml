@@ -35,7 +35,11 @@ jobs:
       #   run: docker exec docker-apache php -r "PHPCrypton::directoryobfuscation('/var/www/html/');"
 
       - name: Check inside container
-        run: docker exec docker-apache ls -la /var/www/html/
+        run: |
+          docker exec docker-apache ls -la /var/www/html/
+          docker exec docker-apache cat /var/www/html/index.php
+          docker exec docker-apache cat /var/www/html/index.php.obfuskasi
+          docker exec docker-apache cat /var/www/html/index.php.orignal
 
       - name: Get AUT URL
         run: |
