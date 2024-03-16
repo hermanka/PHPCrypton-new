@@ -12,7 +12,7 @@ function pdo_connect(){
     }    
 }
 
-pdo_connect();
+var_dump(pdo_connect());
 // if ( pdo_connect() ) {
 //     echo "connected";
 // } else {
