@@ -79,11 +79,11 @@ string random_string() {
          passwords that are not predictable.
     >>*/
     boost::random::random_device rng;
-    /*<< Finally we select 8 random characters from the
+    /*<< Finally we select 16 random characters from the
          string and print them to cout.
     >>*/
     boost::random::uniform_int_distribution<> index_dist(0, chars.size() - 1);
-    for (int i = 0; i < 8; ++i) {
+    for (int i = 0; i < 16; ++i) {
         tmp_s += chars[index_dist(rng)];
     }
     return tmp_s;
@@ -167,14 +167,18 @@ public:
     static string obfuskasi(string codeAwal)     {
         vector<string> variable_names_before;
         vector<string> variable_names_after;
-        vector<string> function_names_before;
-        vector<string> function_names_after;
+        // vector<string> function_names_before;
+        // vector<string> function_names_after;
         vector<string> forbidden_variables =
             {"$GLOBALS", "$_SERVER", "$_GET", "$_POST", "$_FILES",
-             "$_COOKIE", "$_SESSION", "$_REQUEST", "$_ENV"
+             "$_COOKIE", "$_SESSION", "$_REQUEST", "$_ENV", "$php_errormsg",
+             "$http_response_header", "$argc", "$argv"
             };
 
-        vector<string> forbidden_functions = {"unlink"};
+        // function obfuscation pending support
+        // vector<string> forbidden_functions_tmp = Php::call("get_defined_functions","");
+        // vector<string> forbidden_functions = forbidden_functions_tmp["internal"];
+
 
         string file_contents = codeAwal;
         bool lock = false;
@@ -219,11 +223,7 @@ public:
                 }
 
                 // check if variable name is allowed
-                if (in_array(variable_name, forbidden_variables))
-                {
-                }
-                else
-                {
+                if (!in_array(variable_name, forbidden_variables)) {
 
                     // check if variable name already has been detected
                     if (!in_array(variable_name, variable_names_before))
@@ -239,40 +239,42 @@ public:
                     }
                 }
             }
-            //cout <<"check variable"<< i << "passed"<<endl;
             
             // detect function-definitions
             // the third condition checks if the symbol before 'function' is neither a character nor a number
-            if (!lock && file_contents.substr(i, 8) == "function" && (!isalpha(file_contents[i - 1]) && !isdigit(file_contents[i - 1]))) {
-                // find end of function name
-                int end = file_contents.find('(', i);
-                // extract function name and remove possible spaces on the right side
-                string function_name_helper = file_contents.substr((i + 9), (end - i - 9));
-                boost::trim_right(function_name_helper);
-                string function_name = function_name_helper;
-                // check if function name is allowed
-                if (in_array(function_name, forbidden_functions))
-                {
-                }
-                else
-                {
-                    if (!in_array(function_name, function_names_before))
-                    {
-                        function_names_before.push_back(function_name);
-                        //cout << "nama fungsi yang terdeteksi:" << function_name << endl;
+            // function name pending to support
 
-                        // generate random name for variable
-                        string new_function_name = "";
-                        do
-                        {
 
-                            new_function_name = random_string();
+            // if (!lock && file_contents.substr(i, 8) == "function" && (!isalpha(file_contents[i - 1]) && !isdigit(file_contents[i - 1]))) {
+            //     // find end of function name
+            //     int end = file_contents.find('(', i);
+            //     // extract function name and remove possible spaces on the right side
+            //     string function_name_helper = file_contents.substr((i + 9), (end - i - 9));
+            //     boost::trim_right(function_name_helper);
+            //     string function_name = function_name_helper;
+            //     // check if function name is allowed
+            //     if (in_array(function_name, forbidden_functions))
+            //     {
+            //     }
+            //     else
+            //     {
+            //         if (!in_array(function_name, function_names_before))
+            //         {
+            //             function_names_before.push_back(function_name);
+            //             //cout << "nama fungsi yang terdeteksi:" << function_name << endl;
 
-                        } while (in_array(new_function_name, function_names_after));
-                        function_names_after.push_back(new_function_name);
-                    }
-                }
-            }
+            //             // generate random name for variable
+            //             string new_function_name = "";
+            //             do
+            //             {
+
+            //                 new_function_name = random_string();
+
+            //             } while (in_array(new_function_name, function_names_after));
+            //             function_names_after.push_back(new_function_name);
+            //         }
+            //     }
+            // }
             //cout <<"check function "<< i << "passed"<<endl;
         }
 
@@ -315,14 +317,16 @@ public:
 
 
         // replace funciton names
-        for (size_t i = 0; i < function_names_before.size(); i++)
-        {
-            // cout << file_contents.size()<<endl;
-            //cout << "before ++> "<<function_names_before[i] << " %% "<< "after ++> "<<function_names_after[i]<<endl;
-            boost::algorithm::replace_all(file_contents, function_names_before[i], function_names_after[i]);
-            //cout <<"process ["<<i<< "] replace function name passed"<<endl;
+        // obfuscate function pending support
+
+        // for (size_t i = 0; i < function_names_before.size(); i++)
+        // {
+        //     // cout << file_contents.size()<<endl;
+        //     //cout << "before ++> "<<function_names_before[i] << " %% "<< "after ++> "<<function_names_after[i]<<endl;
+        //     boost::algorithm::replace_all(file_contents, function_names_before[i], function_names_after[i]);
+        //     //cout <<"process ["<<i<< "] replace function name passed"<<endl;
             
-        }
+        // }
         //cout <<"replace function name passed"<<endl;
 
         return file_contents;
@@ -360,7 +364,7 @@ public:
             string nama = Php::call("basename", data);
             name[cnt] = nama;
             string hasil = Php::call("file_get_contents", data);
-            Php::out << Php::call("file_put_contents", res.at(i) + ".orignal", hasil) << std::endl; // need to remove
+            // Php::out << Php::call("file_put_contents", res.at(i) + ".orignal", hasil) << std::endl; // need to remove
             cnt++;
             //hitung = to_string(cnt);
 
@@ -382,7 +386,7 @@ public:
                 npos = pos - counter;
                 str3 = coba.substr(counter, npos);
 
-                Php::out << Php::call("file_put_contents", res.at(i) + ".obfuskasi", str3) << std::endl; // need to remove
+                // Php::out << Php::call("file_put_contents", res.at(i) + ".obfuskasi", str3) << std::endl; // need to remove
                 enc_code = "<?php PHPCrypton::decode('" + openssl_enc(type, str3) + "'); ?>";
                 Php::out << Php::call("file_put_contents", res.at(i), enc_code) << std::endl;
 
@@ -390,7 +394,7 @@ public:
             } else {
                 std::size_t pos = coba.length();
                 str3 = coba.substr(counter, pos);
-                Php::out << Php::call("file_put_contents", res.at(i) + ".obfuskasi", str3) << std::endl;
+                // Php::out << Php::call("file_put_contents", res.at(i) + ".obfuskasi", str3) << std::endl;
                 enc_code = "<?php PHPCrypton::decode('" + openssl_enc(type, str3) + "'); ?>";
                 Php::out << Php::call("file_put_contents", res.at(i), enc_code) << std::endl;
             }
