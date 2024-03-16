@@ -35,12 +35,12 @@ jobs:
 
       - name: Get AUT URL
         run: |
-          URL=http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1)
+          URL=$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1)
           echo "URL=$URL" >> $GITHUB_ENV
 
       - name: Check AUT URL
         run: |
-          curl -L ${{ env.URL }}
+          curl -L http://${{ env.URL }}
       
       - name: Context Setup
         # env:
@@ -49,6 +49,16 @@ jobs:
         # Replace the "AUTURL" string in the context file with the real base64-encoded password:
         run: |
           sed -ie "s/AUTURL/${{ env.URL }}/" badcrud.context
+          
+      - name: ZAP Scan
+        uses: hermanka/action-full-scan@master
+        with:
+          target: http://${{ env.URL }}
+          network_name: isolated
+          # Additional command line options
+          # -j   runs the AJAX spider
+          # -U   specifies which user to select from the context file
+          cmd_options: -U "admin" -n badcrud.context
 
       - name: ZAP Scan
         uses: hermanka/action-full-scan@master
