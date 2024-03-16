@@ -22,6 +22,11 @@ jobs:
       - name: Run PHPCrypton Container
         run: docker-compose up -d
 
+      - name: Check directory
+        run: |
+              pwd
+              ls
+              
       - name: Copy source code to container
         run: docker cp web2/. docker-apache:/var/www/html
 
