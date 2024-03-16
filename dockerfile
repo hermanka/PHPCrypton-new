@@ -58,7 +58,7 @@ RUN rm -rf *
 
 
 # sama dengan php obfus1.php \
-RUN alias obfuscate = "php -r PHPCrypton::directoryobfuscation('/var/www/html/');"
+# RUN alias obfuscate = "php -r PHPCrypton::directoryobfuscation('/var/www/html/');"
 
 EXPOSE 80
 
