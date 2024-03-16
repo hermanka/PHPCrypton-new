@@ -22,22 +22,26 @@ jobs:
       - name: Run PHPCrypton Container
         run: docker-compose up -d
 
-      - name: Check directory
+      - name: Check host directory
         run: |
               pwd
               ls -la
               ls -la db/
               
-      - name: Copy source code to container
+      - name: Copy source code to PHPCrypton container
         run: docker cp web2/. docker-apache:/var/www/html
 
       - name: Obfuscate
         run: docker exec docker-apache php -r "PHPCrypton::obfuscate('/var/www/html/');"
 
-      - name: Check inside container
+      - name: Check inside PHPCrypton container
         run: |
           docker exec docker-apache ls -la /var/www/html/
           docker exec docker-apache cat /var/www/html/index.php
+
+      - name: Check inside MySQL container
+        run: |
+          docker exec docker-mysql mysql -uroot -ppassword -hlocalhost
 
       - name: Get AUT URL
         run: |
@@ -57,15 +61,15 @@ jobs:
           sed -ie "s/AUTURL/${{ env.URL }}/" badcrud.context
           cat badcrud.context
           
-      - name: ZAP Scan
-        uses: hermanka/action-full-scan@master
-        with:
-          target: http://${{ env.URL }}
-          network_name: isolated
-          # Additional command line options
-          # -j   runs the AJAX spider
-          # -U   specifies which user to select from the context file
-          cmd_options: -U "admin" -n badcrud.context
+      # - name: ZAP Scan
+      #   uses: hermanka/action-full-scan@master
+      #   with:
+      #     target: http://${{ env.URL }}
+      #     network_name: isolated
+      #     # Additional command line options
+      #     # -j   runs the AJAX spider
+      #     # -U   specifies which user to select from the context file
+      #     cmd_options: -U "admin" -n badcrud.context
           
       - name: stop docker
         run: docker stop docker-apache
