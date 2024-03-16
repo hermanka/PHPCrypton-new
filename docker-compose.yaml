@@ -14,6 +14,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: badcrud
+      MYSQL_ROOT_HOST: "%"
     ports:
       - "3306:3306"
     volumes:
