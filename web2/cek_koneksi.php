@@ -8,13 +8,14 @@ function pdo_connect(){
     try {
     	return new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME, $DATABASE_USER, $DATABASE_PASS);
     } catch(Exception $e) {
-        return false;
+        return $e;
     }    
 }
 
-if ( pdo_connect() ) {
-    echo "connected";
-} else {
-    echo "failed to connect";
-}
+pdo_connect();
+// if ( pdo_connect() ) {
+//     echo "connected";
+// } else {
+//     echo "failed to connect";
+// }
 ?>
