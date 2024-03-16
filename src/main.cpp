@@ -22,8 +22,7 @@ using namespace std;
 string variable_name;
 int counter = 0;
 
-void GetReqDirs(const std::string &path, std::vector<string> &files, const bool showHiddenDirs = false)
-{
+void GetReqDirs(const std::string &path, std::vector<string> &files, const bool showHiddenDirs = false) {
     DIR *dpdf;
     struct dirent *epdf;
     dpdf = opendir(path.c_str());
@@ -44,20 +43,16 @@ void GetReqDirs(const std::string &path, std::vector<string> &files, const bool 
     closedir(dpdf);
 }
 
-bool CheckSubstring(std::string firstString, std::string secondString)
-{
+bool CheckSubstring(std::string firstString, std::string secondString) {
     if (secondString.size() > firstString.size())
         return false;
 
-    for (size_t i = 0; i < firstString.size(); i++)
-    {
+    for (size_t i = 0; i < firstString.size(); i++) {
         size_t j = 0;
         // If the first characters match
-        if (firstString[i] == secondString[j])
-        {
+        if (firstString[i] == secondString[j]) {
             int k = i;
-            while (firstString[i] == secondString[j] && j < secondString.size())
-            {
+            while (firstString[i] == secondString[j] && j < secondString.size()) {
                 j++;
                 i++;
             }
@@ -71,8 +66,7 @@ bool CheckSubstring(std::string firstString, std::string secondString)
 }
 
 
-string random_string()
-{
+string random_string() {
     /*<< We first define the characters that we're going
          to allow.  This is pretty much just the characters
          on a standard keyboard.
@@ -89,15 +83,13 @@ string random_string()
          string and print them to cout.
     >>*/
     boost::random::uniform_int_distribution<> index_dist(0, chars.size() - 1);
-    for (int i = 0; i < 8; ++i)
-    {
+    for (int i = 0; i < 8; ++i) {
         tmp_s += chars[index_dist(rng)];
     }
     return tmp_s;
 }
 
-bool in_array(const string &needle, const vector<string> &haystack)
-{
+bool in_array(const string &needle, const vector<string> &haystack) {
     int max = haystack.size();
 
     if (max == 0)
@@ -109,16 +101,14 @@ bool in_array(const string &needle, const vector<string> &haystack)
     return false;
 }
 
-size_t strpos(const string &haystack, const string &needle)
-{
+size_t strpos(const string &haystack, const string &needle) {
     int sleng = haystack.length();
     int nleng = needle.length();
 
     if (sleng == 0 || nleng == 0)
         return string::npos;
 
-    for (int i = 0, j = 0; i < sleng; j = 0, i++)
-    {
+    for (int i = 0, j = 0; i < sleng; j = 0, i++) {
         while (i + j < sleng && j < nleng && haystack[i + j] == needle[j])
             j++;
         if (j == nleng)
@@ -128,8 +118,7 @@ size_t strpos(const string &haystack, const string &needle)
 }
 
 
-std::vector<std::string> glob(const std::string &pattern)
-{
+std::vector<std::string> glob(const std::string &pattern) {
     glob_t glob_result = {0}; // zero initialize
 
     // do the glob operation
@@ -150,8 +139,7 @@ std::vector<std::string> glob(const std::string &pattern)
     return filenames;
 }
 
-class Cryptix : public Php::Base
-{
+class Cryptix : public Php::Base {
 private:
     /**
      *  Example property
@@ -176,8 +164,7 @@ public:
      */
 
     //obfuscation
-    static string obfuskasi(string codeAwal)
-    {
+    static string obfuskasi(string codeAwal)     {
         vector<string> variable_names_before;
         vector<string> variable_names_after;
         vector<string> function_names_before;
@@ -192,21 +179,17 @@ public:
         string file_contents = codeAwal;
         bool lock = false;
         string lock_quote = "";
-        for (size_t i = 0; i < file_contents.size(); i++)
-        {
+        for (size_t i = 0; i < file_contents.size(); i++) {
             // check if there are quotation marks
             string comparestring(1, file_contents.at(i));
-            if ((comparestring.compare("'") || file_contents.at(i) == '"'))
-            {
+            if ((comparestring.compare("'") || file_contents.at(i) == '"')) {
                 // if first quote
-                if (lock_quote == "")
-                {
+                if (lock_quote == "") {
                     // remember quotation mark
                     lock_quote = file_contents.at(i);
                     lock = true;
                 }
-                else if (comparestring.compare(lock_quote))
-                {
+                else if (comparestring.compare(lock_quote)) {
                     lock_quote = "";
                     lock = false;
                 }
@@ -214,28 +197,24 @@ public:
             //cout <<"check quatation marks passed"<<endl;
 
             // detect variables
-            if (!lock && file_contents.at(i) == '$')
-            {
+            if (!lock && file_contents.at(i) == '$') {
                 int start = i;
                 // detect variable variable names
 
-                if (file_contents.at(i + 1) == '$')
-                {
+                if (file_contents.at(i + 1) == '$') {
                     start++;
                     i++;
                 }
 
                 int end = 1;
                 // find end of variable name
-                while (isalpha(file_contents.at(start + end)) || isdigit(file_contents.at(start + end)) || file_contents.at(start + end) == '_')
-                {
+                while (isalpha(file_contents.at(start + end)) || isdigit(file_contents.at(start + end)) || file_contents.at(start + end) == '_'){
                     end++;
                 }
                 // extract variable name
                 variable_name = file_contents.substr(start, end);
 
-                if (variable_name == "$")
-                {
+                if (variable_name == "$"){
                     continue;
                 }
 
@@ -264,8 +243,7 @@ public:
             
             // detect function-definitions
             // the third condition checks if the symbol before 'function' is neither a character nor a number
-            if (!lock && file_contents.substr(i, 8) == "function" && (!isalpha(file_contents[i - 1]) && !isdigit(file_contents[i - 1])))
-            {
+            if (!lock && file_contents.substr(i, 8) == "function" && (!isalpha(file_contents[i - 1]) && !isdigit(file_contents[i - 1]))) {
                 // find end of function name
                 int end = file_contents.find('(', i);
                 // extract function name and remove possible spaces on the right side
@@ -350,90 +328,7 @@ public:
         return file_contents;
     }
 
-static void layoutobfuscation(Php::Parameters &params)
-    {
-        std::string file = params[0];
-
-        if (params.size() != 1)
-        {
-            cout << "PHPCrypton : You need to supply one argument to this program.\n";
-        }
-        else
-        {
-            string codeAwal = Php::call("file_get_contents", file, true);
-
-            string hasil = obfuskasi(codeAwal);
-            Php::out << Php::call("file_put_contents", file + ".obfuskasi", hasil) << std::endl;
-        }
-    }
-    static void obfuscation(Php::Parameters &params)
-    {
-        std::string type = "aes-256-cbc";
-        std::string file = params[0];
-
-        if (params.size() != 1)
-        {
-            cout << "PHPCrypton : You need to supply one argument to this program.\n";
-        }
-        else
-        {
-            string codeAwal = Php::call("file_get_contents", file, true);
-
-            string hasil = obfuskasi(codeAwal);
-            std::string enc_code = "<?php PHPCrypton::decode('" + openssl_enc(type, hasil) + "'); ?>";
-            Php::out << Php::call("file_put_contents", file + ".original", codeAwal) << std::endl;
-            Php::out << Php::call("file_put_contents", file, enc_code) << std::endl;
-            Php::out << Php::call("file_put_contents", file + ".obfuskasi", hasil) << std::endl;
-        }
-    }
-static void encrypt_file(Php::Parameters &params)
-    {
-        // @todo add implementation
-        std::string type = "aes-256-cbc";
-        std::string file = params[0];
-
-        std::string code = Php::call("file_get_contents", file, true);
-        // if(type=="aes-256-cbc"){
-
-        //output to terminal
-        //Php::out << openssl_enc(type, code) << std::endl;
-
-        std::string enc_code = "<?php PHPCrypton::decode('"+openssl_enc(type, code)+"'); ?>";
-        
-        Php::out << Php::call("file_put_contents", file + ".original", code) << std::endl;
-        Php::out << Php::call("file_put_contents", file, enc_code) << std::endl;
-        // }
-    }
-
-    static void decrypt_file(Php::Parameters &params)
-    {
-        // @todo add implementation
-        std::string type = "aes-256-cbc";
-        std::string file = params[0];
-        
-        
-        std::string code = Php::call("file_get_contents", file, true);
-
-
-        std::string extract_code = Php::call("str_replace","<?php PHPCrypton::decode('","", code); 
-
-        std::string enc_code = Php::call("str_replace","'); ?>","", extract_code);  
-        
-        
-
-        
-        // Php::out << Php::call("file_put_contents", file + ".enc", enc_code) << std::endl;
-        // }
-
-            // add for decrypt from file
-            // std::string code = " ?>" + openssl_dec(type, msg) + "<?php ";
-            // Php::out << openssl_dec(type, enc_code) << std::endl;
-            
-        Php::out << Php::call("file_put_contents", file + ".dec", openssl_dec(type, enc_code)) << std::endl;
-        // }
-    }
-    static void obfus(Php::Parameters &params)
-    {
+    static void obfus(Php::Parameters &params) {
         std::string type = "aes-256-cbc";
         std::string path = params[0];
 
@@ -442,8 +337,7 @@ static void encrypt_file(Php::Parameters &params)
 
         GetReqDirs(path, listfile);
 
-        for (string file : listfile)
-        {
+        for (string file : listfile){
             if (CheckSubstring(file, ".php"))
             {
                 res.push_back(file);
@@ -455,30 +349,25 @@ static void encrypt_file(Php::Parameters &params)
         string gabungan = "potong";
         string nama,hasil;
         vector<string> penanda;
-        for (size_t i = 0; i < res.size(); i++)
-        {
+        for (size_t i = 0; i < res.size(); i++){
             akhir = gabungan + to_string(i);
             penanda.push_back(akhir);
         }
         int cnt = 0;
         int i = 0;
-        for (string data : res)
-        {
+        for (string data : res){
 
             string nama = Php::call("basename", data);
             name[cnt] = nama;
             string hasil = Php::call("file_get_contents", data);
-            Php::out << Php::call("file_put_contents", res.at(i) + ".orignal", hasil) << std::endl;
+            Php::out << Php::call("file_put_contents", res.at(i) + ".orignal", hasil) << std::endl; // need to remove
             cnt++;
             //hitung = to_string(cnt);
 
-            if ((size_t)cnt < res.size())
-            {
+            if ((size_t)cnt < res.size()){
                 input += hasil + "\n" + penanda.at(i) + "\n";
                 i++;
-            }
-            else if ((size_t)cnt == res.size())
-            {
+            } else if ((size_t)cnt == res.size()) {
                 input += hasil;
             }
              coba = obfuskasi(input);
@@ -487,23 +376,18 @@ static void encrypt_file(Php::Parameters &params)
 
         int counter = 0;
         size_t npos = 0;
-        for (size_t i = 0; i < res.size(); i++)
-        {
-            if (i < res.size() - 1)
-            {
+        for (size_t i = 0; i < res.size(); i++) {
+            if (i < res.size() - 1) {
                 std::size_t pos = coba.find(penanda.at(i)); // position of "end" in coba
                 npos = pos - counter;
                 str3 = coba.substr(counter, npos);
 
-                Php::out << Php::call("file_put_contents", res.at(i) + ".obfuskasi", str3) << std::endl;
+                Php::out << Php::call("file_put_contents", res.at(i) + ".obfuskasi", str3) << std::endl; // need to remove
                 enc_code = "<?php PHPCrypton::decode('" + openssl_enc(type, str3) + "'); ?>";
                 Php::out << Php::call("file_put_contents", res.at(i), enc_code) << std::endl;
 
                 counter = pos + penanda.at(i).length();
-            }
-            else
-            {
-
+            } else {
                 std::size_t pos = coba.length();
                 str3 = coba.substr(counter, pos);
                 Php::out << Php::call("file_put_contents", res.at(i) + ".obfuskasi", str3) << std::endl;
@@ -514,8 +398,7 @@ static void encrypt_file(Php::Parameters &params)
         }
     }
 
-    static void decrypt(Php::Parameters &params)
-    {
+    static void decrypt(Php::Parameters &params) {
         // @todo add implementation
         std::string type = "aes-256-cbc";
         std::string msg = params[0];
@@ -530,13 +413,10 @@ static void encrypt_file(Php::Parameters &params)
 
         // standard code is omitting close php tag
         std::string standard_code;
-        if (end_code == "?>")
-        {
+        if (end_code == "?>") {
             // remove closing tag
             standard_code = sanitize_code;
-        }
-        else
-        {
+        } else {
             standard_code = clean_code;
         }
 
@@ -544,18 +424,7 @@ static void encrypt_file(Php::Parameters &params)
         Php::out << Php::eval(code) << std::endl;
     }
 
-    static void encrypt(Php::Parameters &params)
-    {
-        // @todo add implementation
-        std::string type = params[0];
-        std::string msg = params[1];
-        // if(type=="aes-256-cbc"){
-        Php::out << openssl_enc(type, msg) << std::endl;
-        // }
-    }
-
-    static std::string openssl_enc(std::string method, std::string data)
-    {
+    static std::string openssl_enc(std::string method, std::string data) {
 
         std::string firstkey = "Lk5Uz3slx3BrAghS1aaW5AYgWZRV0tIX5eI0yPchFz4=";
         std::string secondkey = "EZ44mFi3TlAey1b2w4Y7lVDuqO+SRxGXsa7nctnr/JmMrA2vN6EJhrvdVZbxaQs5jpSe34X3ejFK/o9+Y5c83w==";
@@ -581,8 +450,7 @@ static void encrypt_file(Php::Parameters &params)
         // Php::out << output << std::endl;
     }
 
-    static std::string openssl_dec(std::string method, std::string cipher)
-    {
+    static std::string openssl_dec(std::string method, std::string cipher) {
         // static void aes_dec(Php::Parameters &params){
 
         std::string firstkey = "Lk5Uz3slx3BrAghS1aaW5AYgWZRV0tIX5eI0yPchFz4=";
@@ -605,12 +473,9 @@ static void encrypt_file(Php::Parameters &params)
 
         std::string second_encrypted_new = Php::call("hash_hmac", "sha512", first_encrypted, second_key, true);
 
-        if (Php::call("hash_equals", second_encrypted, second_encrypted_new))
-        {
+        if (Php::call("hash_equals", second_encrypted, second_encrypted_new)) {
             return data;
-        }
-        else
-        {
+        } else {
             return "0";
         }
     }
@@ -626,26 +491,17 @@ extern "C"
      *
      *  @return void*   a pointer to an address that is understood by PHP
      */
-    PHPCPP_EXPORT void *get_module()
-    {
+    PHPCPP_EXPORT void *get_module() {
         // static(!) Php::Extension object that should stay in memory
         // for the entire duration of the process (that's why it's static)
         static Php::Extension extension("phpcrypton", "1.0");
 
         // Static Class
         Php::Class<Cryptix> myCrypt("PHPCrypton");
-        myCrypt.method<&Cryptix::decrypt>("decode");
-        myCrypt.method<&Cryptix::encrypt>("encode");
-
-        myCrypt.method<&Cryptix::obfuscation>("singleobfuscation");
-        myCrypt.method<&Cryptix::encrypt_file>("encodeFile");
-        myCrypt.method<&Cryptix::decrypt_file>("decodeFile");
-        //myCrypt.method<&Cryptix::dirobfuscation>("directoryobfuscation");
+        myCrypt.method<&Cryptix::decrypt>("decode");        
         myCrypt.method<&Cryptix::obfus>("directoryobfuscation");
-        myCrypt.method<&Cryptix::layoutobfuscation>("layoutobfuscation");
         extension.add(std::move(myCrypt));
 
-        // return the extension
         return extension;
     }
 }
