@@ -6,12 +6,12 @@ services:
     ports:
       - "80:80"
     links:
-      - mysql
+      - mysql-db
 
-  mysql:
+  mysql-db:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: mysqlpassword
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: badcrud
     ports:
       - "3306:3306"
