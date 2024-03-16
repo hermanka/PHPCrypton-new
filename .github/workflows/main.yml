@@ -41,12 +41,24 @@ jobs:
       - name: Check AUT URL
         run: |
           curl -L ${{ env.URL }}
+      
+      - name: Context Setup
+        # env:
+        #     # Set a previously defined secret as an environment variable for this step:
+        #     AUTURL: ${{secrets.B64PASSWORD}}
+        # Replace the "AUTURL" string in the context file with the real base64-encoded password:
+        run: |
+          sed -ie "s/AUTURL/${{ env.URL }}/" badcrud.context
 
-      # - name: ZAP Scan
-      #   uses: hermanka/action-full-scan@master
-      #   with:
-      #     target: http://${{ env.URL }}
-      #     network_name: isolated
+      - name: ZAP Scan
+        uses: hermanka/action-full-scan@master
+        with:
+          target: http://${{ env.URL }}
+          network_name: isolated
+          # Additional command line options
+          # -j   runs the AJAX spider
+          # -U   specifies which user to select from the context file
+          cmd_options: -U "admin" -n badcrud.context
           
       - name: stop docker
         run: docker stop docker-apache
