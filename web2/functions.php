@@ -1,7 +1,7 @@
 <?php
 
 function pdo_connect(){
-    $DATABASE_HOST = 'mysql';
+    $DATABASE_HOST = 'mysql-db';
     $DATABASE_USER = 'root';
     $DATABASE_PASS = 'password';
     $DATABASE_NAME = 'badcrud';
@@ -9,7 +9,7 @@ function pdo_connect(){
     	return new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME, $DATABASE_USER, $DATABASE_PASS);
     } catch (PDOException $exception) {
         echo $exception;
-    	// die ('Failed to connect to database!');
+    	die ('Failed to connect to database!');
     }
 }
 
