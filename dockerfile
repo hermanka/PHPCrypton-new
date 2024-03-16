@@ -4,8 +4,6 @@ FROM ubuntu:18.04
 # Set non-interactive mode
 ENV DEBIAN_FRONTEND=noninteractive
 
-# RUN echo 'alias obfuscate="php -r PHPCrypton::directoryobfuscation(\"/var/www/html/\");"' >> ~/.bashrc
-
 # Install dependencies
 RUN apt-get update  > /dev/null && \
     apt-get install -y \
@@ -41,11 +39,19 @@ RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CP
     && make -s \
     && make install -s
 
-RUN mkdir -p ./phpcrypt-ex
-COPY ./src ./phpcrypt-ex
+# RUN mkdir -p ./phpcrypt-ex
+# COPY ./src ./phpcrypt-ex
 
 # Install PHPCrypton
-RUN cd ./phpcrypt-ex \
+# RUN cd ./phpcrypt-ex \
+#     && make clean -s \
+#     && make -s \
+#     && make install -s \
+#     && phpenmod -v 7.2 phpcrypton 
+
+# Install PHPCrypton
+RUN git clone https://github.com/hermanka/NGPHPCrypton.git \
+    && cd ./NGPHPCrypton \
     && make clean -s \
     && make -s \
     && make install -s \
