@@ -25,8 +25,8 @@ jobs:
       - name: Copy source code to container
         run: docker cp web2/. docker-apache:/var/www/html
 
-      - name: Obfuscate
-        run: docker exec docker-apache php -r "PHPCrypton::obfuscate('/var/www/html/');"
+      # - name: Obfuscate
+      #   run: docker exec docker-apache php -r "PHPCrypton::obfuscate('/var/www/html/');"
 
       - name: Check inside container
         run: |
