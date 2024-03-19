@@ -1,9 +1,6 @@
 name: Another PHPCrypton Functional Testing
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
   build-image:
