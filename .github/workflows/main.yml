@@ -32,13 +32,11 @@ jobs:
     services:
       docker-apache:
         image: phpcrypton:latest
-        container_name: docker-apache
         ports:
           - "80:80"
 
       mysql-db:
         image: mysql:latest
-        container_name: docker-mysql
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: badcrud
@@ -59,17 +57,17 @@ jobs:
       - name: Create isolated network
         run: docker network create --driver bridge isolated 
 
-      - name: Download image from artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: phpcrypton
-          path: /tmp
+      # - name: Download image from artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: phpcrypton
+      #     path: /tmp
       
-      - name: Load saved image
-        run: docker load < /tmp/phpcrypton.tar
+      # - name: Load saved image
+      #   run: docker load < /tmp/phpcrypton.tar
 
-      - name: Run PHPCrypton Container
-        run: docker-compose up -d
+      # - name: Run PHPCrypton Container
+      #   run: docker-compose up -d
 
       - name: Check host directory
         run: |
