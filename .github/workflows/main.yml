@@ -36,6 +36,15 @@ jobs:
       - name: Create isolated network
         run: docker network create --driver bridge isolated 
 
+      - name: Download image from artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: phpcrypton
+          path: /tmp
+      
+      - name: Load saved image
+        run: docker load < /tmp/phpcrypton.tar
+
       - name: Run PHPCrypton Container
         run: docker-compose up -d
 
