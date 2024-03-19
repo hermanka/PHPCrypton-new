@@ -6,18 +6,35 @@ on:
       - main
 
 jobs:
-  test:
-    name: Functional Test
+  build-image:
+    name: Build Images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4 
+
+      - name: Build PHPCrypton Image
+        run: docker build -t phpcrypton:latest .
+
+      - name: Save PHPCrypton Image to Artifact
+        run: docker save -o /tmp/phpcrypton.tar phpcrypton:latest
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: phpcrypton
+          path: /tmp/phpcrypton.tar
+          
+  dast:
+    name: Dynamic Analysis
+    needs: build-image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Create isolated network
-        run: docker network create --driver bridge isolated      
-
-      - name: Build PHPCrypton Image
-        run: docker build -t phpcrypton:latest .
+        run: docker network create --driver bridge isolated 
 
       - name: Run PHPCrypton Container
         run: docker-compose up -d
@@ -75,3 +92,10 @@ jobs:
       - name: stop docker
         run: docker stop docker-apache
 
+performance-test:
+    name: Performance Test
+    needs: build-image
+    runs-on: ubuntu-latest
+    steps:
+      - name: just hello
+        run: echo "Hello World!"
