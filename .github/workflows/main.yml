@@ -35,18 +35,21 @@ jobs:
         container_name: docker-apache
         ports:
           - "80:80"
-        links:
-          - mysql-db
 
       mysql-db:
         image: mysql:latest
         container_name: docker-mysql
-        environment:
+        env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: badcrud
           MYSQL_ROOT_HOST: "%"
         ports:
           - "3306:3306"
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
         volumes:
           - ./db/badcrud.sql:/docker-entrypoint-initdb.d/badcrud.sql:ro
     steps:
