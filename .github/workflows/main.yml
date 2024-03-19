@@ -92,7 +92,7 @@ jobs:
       - name: stop docker
         run: docker stop docker-apache
 
-performance-test:
+  performance-test:
     name: Performance Test
     needs: build-image
     runs-on: ubuntu-latest
