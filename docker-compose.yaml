@@ -12,10 +12,10 @@ services:
     image: mysql:latest
     container_name: docker-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: p455w0rddd
       MYSQL_DATABASE: badcrud
       MYSQL_USER: db_user
-      MYSQL_PASSWORD: password
+      MYSQL_PASSWORD: p455w0rddd
     ports:
       - "3306:3306"
     volumes:

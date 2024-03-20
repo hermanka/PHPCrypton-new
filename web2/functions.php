@@ -3,7 +3,7 @@
 function pdo_connect(){
     $DATABASE_HOST = 'mysql-db';
     $DATABASE_USER = 'db_user';
-    $DATABASE_PASS = 'password';
+    $DATABASE_PASS = 'p455w0rddd';
     $DATABASE_NAME = 'badcrud';
     try {
     	return new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME, $DATABASE_USER, $DATABASE_PASS);
