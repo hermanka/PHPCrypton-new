@@ -34,18 +34,18 @@ RUN apt-get install -y php7.2 \
     a2enmod rewrite > /dev/null
     
 # Clone PHP-CPP repository
-# RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CPP \
-#     && cd ./PHP-CPP \
-#     && make -s \
-#     && make install -s
+RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CPP \
+    && cd ./PHP-CPP \
+    && make -s \
+    && make install -s
 
 # Install PHPCrypton
-# RUN git clone https://github.com/hermanka/NGPHPCrypton.git \
-#     && cd ./NGPHPCrypton \
-#     && make clean -s \
-#     && make -s \
-#     && make install -s \
-#     && phpenmod -v 7.2 phpcrypton 
+RUN git clone https://github.com/hermanka/NGPHPCrypton.git \
+    && cd ./NGPHPCrypton \
+    && make clean -s \
+    && make -s \
+    && make install -s \
+    && phpenmod -v 7.2 phpcrypton 
 
 # Set working directory
 WORKDIR /var/www/html
