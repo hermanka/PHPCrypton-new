@@ -136,12 +136,6 @@ jobs:
       - name: Copy source code to PHPCrypton container
         run: docker cp web2/. docker-apache:/var/www/html
 
-      - name: Check inside PHPCrypton container
-        run: |
-          docker exec docker-apache ls -la /var/www/html/
-          docker exec docker-apache cat /var/www/html/index.php
-          docker exec docker-apache php /var/www/html/cek_koneksi.php
-
       # - name: Check inside MySQL container
       #   run: |
       #     docker exec docker-mysql mysql -uroot -ppassword -hlocalhost
@@ -155,6 +149,12 @@ jobs:
         run: |
           until nc -zv ${{ env.URL }} 3306; do echo "Waiting for MySQL to be ready..."; sleep 5; done
 
+      - name: Check inside PHPCrypton container
+        run: |
+          docker exec docker-apache ls -la /var/www/html/
+          docker exec docker-apache cat /var/www/html/index.php
+          docker exec docker-apache php /var/www/html/cek_koneksi.php
+          
       - name: Check AUT URL
         run: |
           curl -L http://${{ env.URL }}/index-test.php      
