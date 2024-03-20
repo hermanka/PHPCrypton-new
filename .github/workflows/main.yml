@@ -150,11 +150,14 @@ jobs:
         run: |
           URL=$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1)
           echo "URL=$URL" >> $GITHUB_ENV
+      
+      - name: Wait for MySQL to be ready
+        run: |
+          until nc -zv ${{ env.URL }} 3306; do echo "Waiting for MySQL to be ready..."; sleep 5; done
 
       - name: Check AUT URL
         run: |
-          curl -L http://${{ env.URL }}/index-test.php
-      
+          curl -L http://${{ env.URL }}/index-test.php      
                
       - name: stop docker
         run: docker stop docker-apache
