@@ -39,23 +39,13 @@ RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git ./PHP-CP
     && make -s \
     && make install -s
 
-# RUN mkdir -p ./phpcrypt-ex
-# COPY ./src ./phpcrypt-ex
-
 # Install PHPCrypton
-# RUN cd ./phpcrypt-ex \
+# RUN git clone https://github.com/hermanka/NGPHPCrypton.git \
+#     && cd ./NGPHPCrypton \
 #     && make clean -s \
 #     && make -s \
 #     && make install -s \
 #     && phpenmod -v 7.2 phpcrypton 
-
-# Install PHPCrypton
-RUN git clone https://github.com/hermanka/NGPHPCrypton.git \
-    && cd ./NGPHPCrypton \
-    && make clean -s \
-    && make -s \
-    && make install -s \
-    && phpenmod -v 7.2 phpcrypton 
 
 # Set working directory
 WORKDIR /var/www/html
